@@ -35,6 +35,7 @@
 		<pages>
 			<p		name="Home"				u="/"					ico="fa fa-home"		/>
 			<p		name="TTT"				u="/ttt"				ico="fa fa-trophy"		/>
+			<p		name="Hero"				u="/hero"				ico="fa fa-trophy"		/>
 			<p		name="Info"				u="/pg/info"			ico="fa fa-info"		/>
 		</pages>
 	</main_menu>
