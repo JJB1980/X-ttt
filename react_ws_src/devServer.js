@@ -6,21 +6,6 @@ var https = require("https");
 var http = require("http");
 var app = express();
 var compiler = webpack(config);
-const zlib = require("node:zlib");
-const fs = require("node:fs");
-// const { fetch } = require("./fetch.mjs");
-
-const { DecompressionStream } = require("node:stream/web");
-
-async function convertToText(gzipBlob) {
-  const ds = new DecompressionStream("gzip");
-  const decompressedStream = gzipBlob.stream().pipeThrough(ds);
-
-  // Use a Response object for easy text conversion
-  const response = new Response(decompressedStream);
-  const text = await response.text();
-  return text;
-}
 
 app.use(
   require("webpack-dev-middleware")(compiler, {
