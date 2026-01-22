@@ -16,14 +16,12 @@ class Hero extends React.Component {
   }
 
   doSearch(e) {
-    const hero = e.target.value;
-    fetch(`http://0.0.0.0:3000/api/heroes-mock?search=${hero}`)
+    const { search } = this.state;
+    fetch(`http://0.0.0.0:3000/api/heroes?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
         this.setState({
           results: data.results || [],
-          hero,
-          search: "",
           filtered: null,
           error: null,
         });
@@ -31,22 +29,9 @@ class Hero extends React.Component {
       .catch((err) => {
         this.setState({
           error: err.message,
-          hero,
-          search: "",
           filtered: null,
         });
       });
-  }
-
-  filter(search) {
-    if (!search) {
-      this.setState({ filtered: null, search });
-      return;
-    }
-    const list = this.state.results.filter((hero) =>
-      hero.name.toLowerCase().includes(search.toLowerCase()),
-    );
-    this.setState({ filtered: list, search });
   }
 
   render() {
@@ -96,7 +81,7 @@ class Hero extends React.Component {
             >
               <h2>Heroes</h2>
               <br />
-              <select
+              {/* <select
                 value={this.state.hero || ""}
                 onChange={(e) => this.doSearch(e)}
                 placeholder="Search heroes..."
@@ -106,7 +91,7 @@ class Hero extends React.Component {
                 <option value="spiderman">Spiderman</option>
                 <option value="batman">Batman</option>
                 <option value="superman">Superman</option>
-              </select>
+              </select> */}
 
               <br />
               <br />
@@ -114,13 +99,11 @@ class Hero extends React.Component {
               <input
                 type="text"
                 value={this.state.search || ""}
-                onChange={(e) => this.filter(e.target.value)}
+                onChange={(e) => this.setState({ search: e.target.value })}
                 placeholder="Filter heroes..."
               />
 
-              <button type="submit" style={{ display: "none" }}>
-                Search Heros
-              </button>
+              <button type="submit">Search Heros</button>
             </form>
           </section>
 
