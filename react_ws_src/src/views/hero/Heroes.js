@@ -17,6 +17,7 @@ class Hero extends React.Component {
 
   doSearch(e) {
     const { search } = this.state;
+    this.setState({ fetching: true, error: null });
     fetch(`http://0.0.0.0:3000/api/heroes?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
@@ -24,12 +25,14 @@ class Hero extends React.Component {
           results: data.results || [],
           filtered: null,
           error: null,
+          fetching: false,
         });
       })
       .catch((err) => {
         this.setState({
           error: err.message,
           filtered: null,
+          fetching: false,
         });
       });
   }
@@ -95,10 +98,10 @@ class Hero extends React.Component {
           </section>
 
           <section style={{ paddingLeft: "20px" }}>
-            <br />
-            {!this.state.results.length ? (
+            {this.state.fetching && <div>Loading...</div>}
+            {!this.state.fetching && !this.state.results.length ? (
               "Search your favorite hero!"
-            ) : (
+            ) : !this.state.fetching ? (
               <div>
                 {this.state.error && (
                   <div style={{ color: "red" }}>
@@ -125,7 +128,7 @@ class Hero extends React.Component {
                   ),
                 )}
               </div>
-            )}
+            ) : null}
           </section>
         </div>
       </div>
