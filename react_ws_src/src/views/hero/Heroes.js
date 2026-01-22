@@ -80,30 +80,17 @@ class Hero extends React.Component {
               }}
             >
               <h2>Heroes</h2>
-              <br />
-              {/* <select
-                value={this.state.hero || ""}
-                onChange={(e) => this.doSearch(e)}
-                placeholder="Search heroes..."
-                style={{ width: "100%" }}
-              >
-                <option value="">-- Select a hero --</option>
-                <option value="spiderman">Spiderman</option>
-                <option value="batman">Batman</option>
-                <option value="superman">Superman</option>
-              </select> */}
 
-              <br />
               <br />
 
               <input
                 type="text"
                 value={this.state.search || ""}
                 onChange={(e) => this.setState({ search: e.target.value })}
-                placeholder="Filter heroes..."
+                placeholder="Find heroes..."
               />
 
-              <button type="submit">Search Heros</button>
+              <button type="submit">Search</button>
             </form>
           </section>
 
